@@ -15,31 +15,52 @@ import { userValidation } from "@/lib/validations/user";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 
 const AccountProfile = ({ user, btnTitle }: UserProps) => {
+  const [files, setFiles] = useState<File[]>([]);
   // 1. Define your form.
   const form = useForm<z.infer<typeof userValidation>>({
     resolver: zodResolver(userValidation),
     defaultValues: {
-      profile_photo: "",
-      name: "",
-      username: "",
-      bio: "",
+      profile_photo: user?.image || "",
+      name: user?.name || "",
+      username: user?.username || "",
+      bio: user?.bio || "",
     },
   });
 
+  // Function to handle image file selection and update the form state
   const handleImage = (
-    e: ChangeEvent,
+    e: ChangeEvent<HTMLInputElement>,
     fieldChange: (value: string) => void
   ) => {
     e.preventDefault();
+
+    const fileReader = new FileReader();
+
+    // Check if files are selected and if the selected file is an image
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+
+      // Update state with selected files
+      setFiles(Array.from(e.target.files));
+
+      // Return if the file is not an image
+      if (!file.type.includes("image")) return;
+
+      // Update form field with the image URL
+      fileReader.onload = async (event) => {
+        const imageUrl = event.target?.result?.toString() || "";
+        fieldChange(imageUrl);
+      };
+      // Read the file as a data URl
+      fileReader.readAsDataURL(file);
+    }
   };
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof userValidation>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
     console.log(values);
   }
 
@@ -134,12 +155,18 @@ const AccountProfile = ({ user, btnTitle }: UserProps) => {
                 Bio
               </FormLabel>
               <FormControl className="flex-1 text-base-semibold text-gray-200">
-                <Textarea rows={10} className="account_input" placeholder="Enter your bio" />
+                <Textarea
+                  rows={10}
+                  className="account_input"
+                  placeholder="Enter your bio"
+                />
               </FormControl>
             </FormItem>
           )}
         />
-        <Button type="submit" className="bg-primary-500">Submit</Button>
+        <Button type="submit" className="bg-primary-500">
+          Submit
+        </Button>
       </form>
     </Form>
   );
