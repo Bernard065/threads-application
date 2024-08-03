@@ -18,3 +18,10 @@ declare interface UserParams {
   image: string;
   path: string;
 }
+
+declare interface ThreadParams {
+  text: string;
+  author: string;
+  communityId: string | null;
+  path: string;
+}

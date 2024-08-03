@@ -10,6 +10,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { userValidation } from "@/lib/validations/user";
 import { Input } from "@/components/ui/input";
@@ -142,6 +143,7 @@ const AccountProfile = ({ user, btnTitle }: UserProps) => {
                   onChange={(e) => handleImage(e, field.onChange)}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -161,6 +163,7 @@ const AccountProfile = ({ user, btnTitle }: UserProps) => {
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -180,6 +183,7 @@ const AccountProfile = ({ user, btnTitle }: UserProps) => {
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -199,6 +203,7 @@ const AccountProfile = ({ user, btnTitle }: UserProps) => {
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
