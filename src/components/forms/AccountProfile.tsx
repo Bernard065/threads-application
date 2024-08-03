@@ -18,10 +18,15 @@ import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import { isBase64Image } from "@/lib/utils";
 import { useUploadThing } from "@/lib/uploadthing";
+import { updateUser } from "@/lib/actions/user.actions";
+import { usePathname, useRouter } from "next/navigation";
 
 const AccountProfile = ({ user, btnTitle }: UserProps) => {
   const [files, setFiles] = useState<File[]>([]);
   const { startUpload } = useUploadThing("media");
+
+  const pathname = usePathname();
+  const router = useRouter();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof userValidation>>({
@@ -80,6 +85,20 @@ const AccountProfile = ({ user, btnTitle }: UserProps) => {
     }
 
     // Update user profile
+    await updateUser({
+      userId: user.id,
+      username: values.username,
+      name: values.name,
+      image: values.profile_photo,
+      bio: values.bio,
+      path: pathname,
+    });
+
+    if (pathname === "/profile/edit") {
+      router.back();
+    } else {
+      router.push("/");
+    }
   }
 
   return (
@@ -177,6 +196,7 @@ const AccountProfile = ({ user, btnTitle }: UserProps) => {
                   rows={10}
                   className="account_input"
                   placeholder="Enter your bio"
+                  {...field}
                 />
               </FormControl>
             </FormItem>
