@@ -14,8 +14,13 @@ import {
 } from "@/components/ui/form";
 import { postValidation } from "@/lib/validations/post";
 import { Textarea } from "@/components/ui/textarea";
+import { createThread } from "@/lib/actions/thread.actions";
+import { usePathname, useRouter } from "next/navigation";
 
 const PostThread = ({ userId }: { userId: string }) => {
+  const pathname = usePathname();
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof postValidation>>({
     resolver: zodResolver(postValidation),
     defaultValues: {
@@ -25,10 +30,15 @@ const PostThread = ({ userId }: { userId: string }) => {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof postValidation>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof postValidation>) {
+    await createThread({
+      text: values.thread,
+      author: userId,
+      communityId: null,
+      path: pathname,
+    });
+
+    router.push("/");
   }
   return (
     <Form {...form}>
