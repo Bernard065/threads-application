@@ -16,9 +16,18 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
+import { isBase64Image } from "@/lib/utils";
+import { useUploadThing } from "@/lib/uploadthing";
+import { updateUser } from "@/lib/actions/user.actions";
+import { usePathname, useRouter } from "next/navigation";
 
 const AccountProfile = ({ user, btnTitle }: UserProps) => {
   const [files, setFiles] = useState<File[]>([]);
+  const { startUpload } = useUploadThing("media");
+
+  const pathname = usePathname();
+  const router = useRouter();
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof userValidation>>({
     resolver: zodResolver(userValidation),
@@ -60,8 +69,36 @@ const AccountProfile = ({ user, btnTitle }: UserProps) => {
   };
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof userValidation>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof userValidation>) {
+    const blob = values.profile_photo; // Get the profile photo from the form values
+
+    // Check if the image has changed by verifying if its a base64 encoded image
+    const hasImageChanged = isBase64Image(blob);
+
+    if (hasImageChanged) {
+      // If the image has changed, upload the new image
+      const imgRes = await startUpload(files);
+
+      if (imgRes && imgRes[0].url) {
+        values.profile_photo = imgRes[0].url;
+      }
+    }
+
+    // Update user profile
+    await updateUser({
+      userId: user.id,
+      username: values.username,
+      name: values.name,
+      image: values.profile_photo,
+      bio: values.bio,
+      path: pathname,
+    });
+
+    if (pathname === "/profile/edit") {
+      router.back();
+    } else {
+      router.push("/");
+    }
   }
 
   return (
@@ -159,6 +196,7 @@ const AccountProfile = ({ user, btnTitle }: UserProps) => {
                   rows={10}
                   className="account_input"
                   placeholder="Enter your bio"
+                  {...field}
                 />
               </FormControl>
             </FormItem>
