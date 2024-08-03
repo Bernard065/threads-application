@@ -25,3 +25,27 @@ declare interface ThreadParams {
   communityId: string | null;
   path: string;
 }
+
+declare interface ThreadProps {
+  id: string;
+  currentUserId: string;
+  parentId: string | null;
+  content: string;
+  author: {
+    name: string;
+    image: string;
+    id: string;
+  };
+  community: {
+    id: string;
+    name: string;
+    image: string;
+  } | null;
+  createdAt: string;
+  comments: {
+    author: {
+      image: string;
+    };
+  }[];
+  isComment?: boolean;
+}
