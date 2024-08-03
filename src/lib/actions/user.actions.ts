@@ -38,3 +38,14 @@ export async function updateUser({
     console.log(error);
   }
 }
+
+// Fetch user
+export async function fetchUser(userId: string) {
+  try {
+    connectToDB();
+
+    return await User.findOne({ id: userId });
+  } catch (error) {
+    console.log(error);
+  }
+}
