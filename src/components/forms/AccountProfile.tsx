@@ -158,7 +158,7 @@ const AccountProfile = ({ user, btnTitle }: UserProps) => {
               <FormControl className="flex-1 text-base-semibold text-gray-200">
                 <Input
                   type="text"
-                  className="account_input"
+                  className="account_input no-focus"
                   placeholder="Enter your name"
                   {...field}
                 />
@@ -178,7 +178,7 @@ const AccountProfile = ({ user, btnTitle }: UserProps) => {
               <FormControl className="flex-1 text-base-semibold text-gray-200">
                 <Input
                   type="text"
-                  className="account_input"
+                  className="account_input no-focus"
                   placeholder="Enter your name"
                   {...field}
                 />
@@ -198,7 +198,7 @@ const AccountProfile = ({ user, btnTitle }: UserProps) => {
               <FormControl className="flex-1 text-base-semibold text-gray-200">
                 <Textarea
                   rows={10}
-                  className="account_input"
+                  className="account_input no-focus"
                   placeholder="Enter your bio"
                   {...field}
                 />

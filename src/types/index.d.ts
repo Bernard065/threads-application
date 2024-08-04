@@ -49,3 +49,9 @@ declare interface ThreadProps {
   }[];
   isComment?: boolean;
 }
+
+declare interface CommentsProps {
+  threadId: string;
+  currentUserImage: string;
+  currentUserId: string;
+}
