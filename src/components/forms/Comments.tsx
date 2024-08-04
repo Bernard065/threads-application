@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { usePathname, useRouter } from "next/navigation";
 import { commentValidation } from "@/lib/validations/post";
 import Image from "next/image";
+import { addCommentToThread } from "@/lib/actions/thread.actions";
 
 const Comments = ({
   threadId,
@@ -36,10 +37,15 @@ const Comments = ({
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof commentValidation>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof commentValidation>) {
+    await addCommentToThread(
+      threadId,
+      values.thread,
+      JSON.parse(currentUserId),
+      pathname
+    );
+
+    form.reset();
   }
   return (
     <Form {...form}>
