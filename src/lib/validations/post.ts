@@ -12,3 +12,4 @@ export const commentValidation = z.object({
     message: "Thread must be at least 2 characters.",
   }),
 });
+
