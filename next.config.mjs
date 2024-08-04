@@ -29,6 +29,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "placehold.com", // Allow images from Placehold
       },
+      {
+        protocol: "https",
+        hostname: "utfs.io", // Allow images from utfs.io
+      },
     ],
   },
 };

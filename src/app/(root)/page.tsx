@@ -10,6 +10,8 @@ const Home = async () => {
 
   return (
     <>
+      <h1 className="head-text text-left">Home</h1>
+      
       <section className="flex flex-col mt-9 gap-10">
         {result?.threads.length === 0 ? (
           <p className="text-center text-base-regular text-light-3">
