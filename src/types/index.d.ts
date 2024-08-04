@@ -55,3 +55,18 @@ declare interface CommentsProps {
   currentUserImage: string;
   currentUserId: string;
 }
+
+declare interface ProfileHeaderProps {
+  accountId: string;
+  authUserId: string;
+  name: string;
+  username: string;
+  imgUrl: string;
+  bio: string;
+}
+
+declare interface ThreadsTabProps {
+  currentUserId: string;
+  accountType: string;
+  accountId: string;
+}
