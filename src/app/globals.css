@@ -66,9 +66,11 @@
   .user-card_btn {
     @apply bg-primary-500 h-auto min-w-[74px] rounded-lg text-light-1 text-[12px] !important;
   }
+
+  .activity-card {
+    @apply flex items-center gap-2 rounded-md bg-dark-2 px-7 py-4;
+  }
 }
-
-
 
 @layer utilities {
   .css-invert {
