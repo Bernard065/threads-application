@@ -70,3 +70,4 @@ declare interface ThreadsTabProps {
   accountType: string;
   accountId: string;
 }
+
