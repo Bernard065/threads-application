@@ -54,6 +54,22 @@
   .card_bar {
     @apply relative mt-2 w-0.5 grow rounded-full bg-neutral-800;
   }
+
+  .user-card {
+    @apply flex flex-col justify-between gap-4 max-xs:rounded-xl max-xs:bg-dark-3 max-xs:p-4 xs:flex-row;
+  }
+
+  .user-card_avatar {
+    @apply flex flex-1 items-center justify-center gap-3;
+  }
+
+  .user-card_btn {
+    @apply bg-primary-500 h-auto min-w-[74px] rounded-lg text-light-1 text-[12px] !important;
+  }
+
+  .activity-card {
+    @apply flex items-center gap-2 rounded-md bg-dark-2 px-7 py-4;
+  }
 }
 
 @layer utilities {
@@ -96,4 +112,3 @@
     @apply flex flex-1 bg-dark-2 min-h-[50px] items-center gap-3 text-light-2 data-[state=active]:bg-[#0e0e12] data-[state=active]:text-light-2 !important;
   }
 }
-

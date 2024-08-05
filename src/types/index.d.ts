@@ -71,3 +71,10 @@ declare interface ThreadsTabProps {
   accountId: string;
 }
 
+declare interface SearchUsersProps {
+  id: string;
+  name: string;
+  username: string;
+  imgUrl: string;
+  personType: string;
+}

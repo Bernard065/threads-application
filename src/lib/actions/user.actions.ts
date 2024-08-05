@@ -4,6 +4,7 @@ import { FilterQuery, SortOrder } from "mongoose";
 import User from "../models/user.model";
 import { connectToDB } from "../mongoose";
 import { revalidatePath } from "next/cache";
+import Thread from "../models/thread.models";
 
 // Update user in the database
 export async function updateUser({
@@ -107,6 +108,36 @@ export async function fetchUsers({
 
     // Return the list of users and a flag indicating if there;s a next page
     return { users, isNext };
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// Get Activity
+export async function getActivity(userId: string) {
+  try {
+    connectToDB();
+
+    //Find all threads created by the user
+    // THis fetches an array of thread objects where the author field matches the provided userId
+    const userThreads = await Thread.find({ author: userId });
+
+    // Collect all the child threads from threads
+    const childThreads = userThreads.reduce((acc, userThread) => {
+      return acc.concat(userThread.children);
+    }, []);
+
+    // Get comments excluding the ones for current user
+    const comments = await Thread.find({
+      _id: { $in: childThreads },
+      author: { $ne: userId },
+    }).populate({
+      path: "author",
+      model: User,
+      select: "name image _id",
+    });
+
+    return comments;
   } catch (error) {
     console.log(error);
   }
