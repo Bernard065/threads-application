@@ -27,14 +27,14 @@ const Header = () => {
           </SignedIn>
         </div>
 
-        {/* <OrganizationSwitcher
+        <OrganizationSwitcher
           appearance={{
             baseTheme: dark,
             elements: {
               organizationSwitcherTrigger: "py-2 px-4",
             },
           }}
-        /> */}
+        />
       </div>
     </nav>
   );
