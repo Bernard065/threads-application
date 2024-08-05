@@ -40,7 +40,7 @@ const ThreadCard = ({
             </Link>
             <p className="text-small-regular text-light-2 mt-2">{content}</p>
 
-            <div className="flex flex-col mt-5 gap-3">
+            <div className="flex flex-col mt-5 gap-3 mb-10">
               <div className="flex gap-5">
                 <Image
                   src="/assets/heart-gray.svg"
