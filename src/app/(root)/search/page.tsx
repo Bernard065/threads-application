@@ -23,6 +23,13 @@ const Page = async () => {
   return (
     <section>
       {/* Search Bar */}
+      <div className="relative mt-8 mb-5">
+        <Input
+          placeholder="Search by username or name"
+          className="account_input no-focus placeholder:text-light-1 w-full"
+          style={{ zIndex: 1000 }} // Ensure it's on top of other elements
+        />
+      </div>
 
       <div className="mt-14 flex flex-col gap-9">
         {result?.users.length === 0 ? (
