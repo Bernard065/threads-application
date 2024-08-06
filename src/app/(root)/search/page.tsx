@@ -1,4 +1,5 @@
 import UserCard from "@/components/cards/UserCard";
+import { Input } from "@/components/ui/input";
 import { fetchUser, fetchUsers } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
