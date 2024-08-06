@@ -24,7 +24,7 @@ const Page = async () => {
   return (
     <section>
       {/* Search Bar */}
-      <div className="relative mt-8 mb-5">
+      <div className="relative mt-6 mb-10">
         <Input
           placeholder="Search by username or name"
           className="account_input no-focus placeholder:text-light-1 w-full"
