@@ -1,12 +1,7 @@
-import Header from '@/components/shared/Header'
+import React from "react";
 
+const page = () => {
+  return <div className="text-white">page</div>;
+};
 
-const Page = () => {
-  return (
-    <>
-    <Header />
-    </>
-  )
-}
-
-export default Page
+export default page;
