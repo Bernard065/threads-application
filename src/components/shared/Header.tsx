@@ -1,7 +1,13 @@
-import { OrganizationSwitcher, SignedIn, SignOutButton } from "@clerk/nextjs";
+import {
+  OrganizationSwitcher,
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignOutButton,
+} from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
-import {dark} from '@clerk/themes'
+import { dark } from "@clerk/themes";
 
 const Header = () => {
   return (
@@ -26,6 +32,12 @@ const Header = () => {
             </SignOutButton>
           </SignedIn>
         </div>
+
+        <SignedOut>
+          <div className="bg-primary-500 px-5 py-2 rounded-md items-center justify-center">
+            <SignInButton>Login</SignInButton>
+          </div>
+        </SignedOut>
 
         <OrganizationSwitcher
           appearance={{
