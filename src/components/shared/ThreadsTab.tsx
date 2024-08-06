@@ -1,15 +1,21 @@
 import { fetchUserThreads } from "@/lib/actions/thread.actions";
 import { redirect } from "next/navigation";
 import ThreadCard from "@/components/cards/ThreadCard";
+import { fetchCommunityPosts } from "@/lib/actions/community.actions";
 
 const ThreadsTab = async ({
   currentUserId,
   accountType,
   accountId,
 }: ThreadsTabProps) => {
-  let result = await fetchUserThreads(accountId);
+  let result: any;
 
-  if (!result) redirect("/");
+  if (accountType === "Community") {
+    result = await fetchCommunityPosts(accountId);
+  } else {
+    result = await fetchUserThreads(accountId);
+  }
+
   return (
     <section className="mt-9 flex flex-col gap-10">
       {result.threads.map((thread: any) => (

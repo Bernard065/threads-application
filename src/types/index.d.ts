@@ -63,6 +63,7 @@ declare interface ProfileHeaderProps {
   username: string;
   imgUrl: string;
   bio: string;
+  type?: "User" | "Community"
 }
 
 declare interface ThreadsTabProps {

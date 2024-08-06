@@ -7,6 +7,7 @@ const ProfileHeader = ({
   username,
   imgUrl,
   bio,
+  type,
 }: ProfileHeaderProps) => {
   const capitalizeFirstLetter = (str: string) => {
     if (!str) return str;
