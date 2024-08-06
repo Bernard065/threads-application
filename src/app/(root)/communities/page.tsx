@@ -3,6 +3,7 @@ import { fetchCommunities } from "@/lib/actions/community.actions";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import { Input } from "@/components/ui/input";
 
 const Page = async () => {
   const user = await currentUser();
@@ -23,8 +24,15 @@ const Page = async () => {
   return (
     <section>
       {/* Search Bar */}
+      <div className="relative mt-10">
+        <Input
+          placeholder="Search by username or name"
+          className="account_input no-focus placeholder:text-light-1 w-full"
+          style={{ zIndex: 1000 }} // Ensure it's on top of other elements
+        />
+      </div>
 
-      <div className="mt-14 flex flex-col gap-9">
+      <div className="grid grid-cols-1 md:grid-cols-2  gap-9">
         {result?.communities.length === 0 ? (
           <p className="text-center !text-base-regular text-light-3">No user</p>
         ) : (
