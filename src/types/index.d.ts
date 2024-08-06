@@ -79,3 +79,15 @@ declare interface SearchUsersProps {
   imgUrl: string;
   personType: string;
 }
+
+
+declare interface CommunityProps {
+  id: string;
+  name: string;
+  username: string;
+  imgUrl: string;
+  bio: string;
+  members: {
+    image: string;
+  }[];
+}
