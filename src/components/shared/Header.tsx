@@ -32,11 +32,12 @@ const Header = () => {
             </SignOutButton>
           </SignedIn>
         </div>
-        <div className="bg-primary-500 px-5 py-2 rounded-md items-center justify-center">
-          <SignedOut>
+
+        <SignedOut>
+          <div className="bg-primary-500 px-5 py-2 rounded-md items-center justify-center">
             <SignInButton>Login</SignInButton>
-          </SignedOut>
-        </div>
+          </div>
+        </SignedOut>
 
         <OrganizationSwitcher
           appearance={{

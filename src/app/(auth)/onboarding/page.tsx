@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 const Page = async () => {
   const user = await currentUser();
 
-  if (!user) return null;
+  if (!user) return redirect("/sign-in");
 
   const userInfo = await fetchUser(user.id);
 
@@ -16,9 +16,9 @@ const Page = async () => {
     id: user?.id,
     objectId: userInfo?._id,
     username: userInfo ? userInfo?.username : user?.username,
-    name: userInfo? userInfo?.name : user?.firstName || "",
-    bio: userInfo? userInfo?.bio : "",
-    image: userInfo? userInfo?.image : user?.imageUrl,
+    name: userInfo ? userInfo?.name : user?.firstName || "",
+    bio: userInfo ? userInfo?.bio : "",
+    image: userInfo ? userInfo?.image : user?.imageUrl,
   };
   return (
     <main className="flex flex-col max-w-3xl mx-auto justify-start px-10 py-20">

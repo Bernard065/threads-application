@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 const Page = async () => {
   const user = await currentUser();
 
-  if (!user) return null;
+  if (!user) return redirect("/sign-in");
 
   const userInfo = await fetchUser(user.id);
 
@@ -38,7 +38,6 @@ const Page = async () => {
                 imgUrl={community.image}
                 bio={community.bio}
                 members={community.members}
-            
               />
             ))}
           </>

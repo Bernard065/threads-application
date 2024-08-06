@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 const Page = async () => {
   const user = await currentUser();
 
-  if (!user) return null;
+  if (!user) return redirect("/sign-in");
 
   const userInfo = await fetchUser(user.id);
 
@@ -32,7 +32,12 @@ const Page = async () => {
                     height={20}
                     className="rounded-full object-cover"
                   />
-                  <p className="!text-small-regular text-light-1"><span className="mr-1 text-primary-500">{activity.author.name}</span>{" "}replied to your thread</p>
+                  <p className="!text-small-regular text-light-1">
+                    <span className="mr-1 text-primary-500">
+                      {activity.author.name}
+                    </span>{" "}
+                    replied to your thread
+                  </p>
                 </article>
               </Link>
             ))}
